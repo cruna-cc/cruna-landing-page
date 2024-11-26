@@ -3,75 +3,203 @@
 <head>
   <meta charset="UTF-8"/>
   <link rel="icon" href="./favicon.ico"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cruna</title>
-    <style>
-      /* Basic reset */
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cruna</title>
+  <style>
+    /* Basic reset and variables */
+    :root {
+      --dark-purple: #190c2f;
+      --dark-ave-purple: #390c3f;
+      --dark-dark-teal: #00202f;
+      --dark-teal: #193243;
+      --light-purple: aliceblue;
+      --light-ave-purple: #ffddee;
+      --light-dark-teal: #00202f;
+      --light-teal: #ccffff;
+      --teal: teal;
+      --lightseagreen: lightseagreen;
+    }
 
-      :root {
-        --dark-purple: #190c2f;
-        --dark-ave-purple: #390c3f;
-        --dark-dark-teal: #00202f;
-        --dark-teal: #193243;
-        --light-purple: aliceblue;
-        --light-ave-purple: #ffddee;
-        --light-dark-teal: #00202f;
-        --light-teal: #ccffff;
-      }
+    body, html {
+      background-image: linear-gradient(
+              to right,
+              var(--dark-dark-teal),
+              var(--dark-dark-teal),
+              var(--dark-teal),
+              var(--dark-ave-purple),
+              var(--dark-purple)
+      );
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: Arial, sans-serif;
+      color: var(--light-teal);
+    }
 
-      body, html {
-        background-image: linear-gradient(
-                to right,
-                var(--dark-dark-teal),
-                var(--dark-dark-teal),
-                var(--dark-teal),
-                var(--dark-ave-purple),
-                var(--dark-purple)
-        );
-        margin: 0;
-        padding: 0;
-        height: 100%;
-        font-family: Arial, sans-serif;
-        color: teal;
-      }
+    /* Navigation menu styles */
+    nav {
+      background-color: rgba(0, 0, 0, 0.5);
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+    }
 
-      /* Center content */
-      .container {
-        display: flex;
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 10px;
+      display: flex;
+      justify-content: center;
+    }
+
+    nav li {
+      margin: 0 20px;
+    }
+
+    nav a {
+      color: var(--light-teal);
+      text-decoration: none;
+      font-size: 1.1em;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: var(--lightseagreen);
+    }
+
+    /* Center content */
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 80px; /* Adjusted to account for the fixed nav */
+    }
+
+    .content {
+      text-align: center;
+    }
+
+    .content img {
+      max-width: 80%;
+      height: auto;
+    }
+
+    /* Introduction section styles */
+    .intro {
+      max-width: 800px;
+      margin: 40px 20px;
+      background-color: rgba(25, 12, 47, 0.8); /* Semi-transparent background */
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .intro h1 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      color: var(--light-purple);
+    }
+
+    .intro p {
+      font-size: 1.2em;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      color: var(--light-teal);
+    }
+
+    .intro a {
+      color: var(--lightseagreen);
+      text-decoration: none;
+    }
+
+    .intro a:hover {
+      text-decoration: underline;
+    }
+
+    /* Footer styles */
+    footer {
+      padding: 40px 0;
+      width: 100%;
+      text-align: center;
+      font-size: 90%;
+      color: var(--light-teal);
+    }
+
+    footer a {
+      color: var(--lightseagreen);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 600px) {
+      nav ul {
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: 100%;
       }
 
-      footer {
-        position: absolute;
-        bottom: 40px;
-        width: 100%;
-        text-align: center;
-        font-size: 90%;
+      nav li {
+        margin: 10px 0;
       }
 
-      a {
-        color: lightseagreen;
+      .content img {
+        max-width: 100%;
       }
-    </style>
-  </head>
 
-  <body>
+      .intro {
+        margin: 20px 10px;
+        padding: 20px;
+      }
 
-  <div class="container">
+      .intro h1 {
+        font-size: 2em;
+      }
+
+      .intro p {
+        font-size: 1.1em;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- Navigation Menu -->
+<nav>
+  <ul>
+    <li><a href="#">Home</a></li>
+    <li><a href="https://github.com/cruna-cc/cruna-protocol" target="_blank">Cruna Protocol</a></li>
+    <li><a href="erc7656.html">ERC7656</a></li>
+  </ul>
+</nav>
+
+<div class="container">
+  <div class="content">
     <!-- Logo in the center of the page -->
     <img src="./cruna-logo-two.png" alt="Cruna Logo">
   </div>
 
-  <!-- Footer with Twitter link -->
-  <footer>
-    For more info about Cruna look at the <a href="https://github.com/cruna-cc/cruna-protocol" target="_blank">Cruna Protocol repo</a><br/>
-    (c) 2023+ Cruna — <a href="https://x.com/cruna_cc" target="_blank">Follow us on X</a>
-  </footer>
+  <!-- Introduction Section -->
+  <section class="intro">
+    <h1>Welcome to Cruna</h1>
 
-  </body>
+    <p>At <strong>Cruna</strong>, we're on a mission to revolutionize the NFT landscape. We believe in the limitless potential of Non-Fungible Tokens and are dedicated to unlocking new possibilities through innovation and collaboration.</p>
 
-  </html>
+    <p><strong>The Cruna Protocol</strong> is at the forefront of this transformation, providing a robust framework that empowers developers to create, deploy, and manage advanced NFT functionalities with ease. By leveraging standards like <a href="erc7656.html">ERC7656</a>, we're enabling NFTs to seamlessly integrate with a wide array of services without the need to alter existing standards or contribute to ERC proliferation.</p>
 
+    <p>Our work on <a href="erc7656.html">ERC7656</a> addresses critical challenges in the NFT ecosystem, such as contract size limitations and the complexities arising from multiple overlapping standards. By allowing the deployment of modular and extensible services linked to NFTs, we're opening doors to use cases like real-world asset association, identity verification, financial data integration, and much more.</p>
+
+    <p>At Cruna, we're not just building tools—we're shaping the future of NFTs. Join us in expanding the horizons of what's possible, and let's innovate together to create a more dynamic and versatile NFT ecosystem.</p>
+  </section>
+</div>
+
+<!-- Footer -->
+<footer>
+  &copy; 2023+ Cruna — <a href="https://x.com/cruna_cc" target="_blank">Follow us on X</a>
+</footer>
+
+</body>
+</html>

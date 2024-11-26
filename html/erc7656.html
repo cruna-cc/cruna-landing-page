@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ERC7656 - Generalized Token-Linked Services</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Aligning styles with Cruna's website colors */
+        :root {
+            --dark-purple: #190c2f;
+            --dark-ave-purple: #390c3f;
+            --dark-dark-teal: #00202f;
+            --dark-teal: #193243;
+            --light-purple: aliceblue;
+            --light-ave-purple: #ffddee;
+            --light-dark-teal: #00202f;
+            --light-teal: #ccffff;
+            --teal: teal;
+            --lightseagreen: lightseagreen;
+        }
+
+        body {
+            background-image: linear-gradient(
+                    to right,
+                    var(--dark-dark-teal),
+                    var(--dark-dark-teal),
+                    var(--dark-teal),
+                    var(--dark-ave-purple),
+                    var(--dark-purple)
+            );
+            color: var(--light-teal);
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header, footer {
+            background-color: transparent;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        header h1 {
+            margin: 60px 0 0;
+            font-size: 2.5em;
+            color: var(--light-teal);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 40px auto;
+            color: var(--light-teal);
+            margin-top: 80px; /* Adjusted to accommodate the fixed main navigation */
+        }
+
+        section {
+            margin-bottom: 60px;
+        }
+
+        section h2 {
+            font-size: 2em;
+            border-bottom: 2px solid var(--lightseagreen);
+            padding-bottom: 10px;
+            color: var(--light-teal);
+        }
+
+        section p, section li, section code {
+            line-height: 1.6;
+            font-size: 1.1em;
+            color: var(--light-teal);
+        }
+
+        section h3 {
+            margin-top: 2em;
+        }
+
+        ul {
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+
+        pre {
+            background-color: rgba(25, 12, 47, 0.8); /* Semi-transparent dark background */
+            padding: 15px;
+            overflow-x: auto;
+            border-radius: 5px;
+            color: var(--light-teal);
+        }
+
+        code {
+            color: var(--lightseagreen);
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--lightseagreen);
+            color: var(--dark-dark-teal);
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        footer p {
+            margin: 5px 0;
+            color: var(--light-teal);
+        }
+
+        a {
+            color: var(--lightseagreen);
+        }
+
+        /* Main Navigation Menu Styles */
+        #main-nav {
+            background-color: rgba(0, 0, 0, 0.5);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+        }
+
+        #main-nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+        }
+
+        #main-nav li {
+            margin: 0 20px;
+        }
+
+        #main-nav a {
+            color: var(--light-teal);
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+
+        #main-nav a:hover {
+            color: var(--lightseagreen);
+        }
+
+        /* Responsive adjustments for main navigation */
+        @media (max-width: 600px) {
+            #main-nav ul {
+                flex-direction: column;
+            }
+
+            #main-nav li {
+                margin: 10px 0;
+            }
+        }
+
+        /* Sub Navigation Menu Styles */
+        #sub-nav {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        #sub-nav a {
+            color: var(--lightseagreen);
+            margin: 0 10px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        #sub-nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive adjustments for sub navigation */
+        @media (max-width: 600px) {
+            #sub-nav {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            #sub-nav a {
+                margin: 5px;
+            }
+        }
+    </style>
+
+
+</head>
+<body>
+
+<!-- Main Navigation Menu -->
+<nav id="main-nav">
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="https://github.com/cruna-cc/cruna-protocol" target="_blank">Cruna Protocol</a></li>
+        <li><a href="erc7656.html">ERC7656</a></li>
+    </ul>
+</nav>
+
+<header>
+    <h1>ERC7656</h1>
+    <p>Generalized Token-Linked Services</p>
+    <!-- Sub Navigation Menu -->
+    <nav id="sub-nav">
+        <a href="#introduction">Introduction</a>
+        <a href="#evolution">Evolution</a>
+        <a href="#solution">Our Solution</a>
+        <a href="#benefits">Benefits</a>
+        <a href="#erc-proliferation">ERC Proliferation</a>
+        <a href="#reference">Reference Implementation</a>
+        <a href="#get-involved">Get Involved</a>
+    </nav>
+</header>
+
+
+<div class="container">
+    <section id="introduction">
+        <h2>Introduction</h2>
+        <p>
+            Welcome to ERC7656, a groundbreaking proposal that aims to revolutionize how Non-Fungible Tokens (NFTs) interact with smart contracts. Building upon the foundation laid by <a href="https://eips.ethereum.org/EIPS/eip-6551" style="color: #00bfa5;">ERC6551</a>, we introduce a more flexible and generalized approach to linking services with NFTs.
+        </p>
+        <p>
+            ERC6551 introduced the innovative concept of token-bound accounts, allowing each NFT to own a smart contract account. This was a significant leap forward, opening new possibilities for NFTs to interact with decentralized applications. ERC7656 builds on this foundation, extending its capabilities to unlock even more potential.
+        </p>
+    </section>
+
+    <section id="evolution">
+        <h2>The Evolution from ERC6551</h2>
+        <p>
+            ERC6551 set the stage by enabling NFTs to have associated smart contract accounts, effectively giving NFTs their own wallets. This breakthrough allowed for more dynamic interactions and functionalities. Recognizing the immense potential of this concept, ERC7656 aims to generalize and expand upon it.
+        </p>
+        <p>
+            While ERC6551 focused on account-like contracts, ERC7656 broadens the scope to include any type of contract that can be linked to an NFT. This evolution is not about replacing ERC6551 but enhancing and complementing it. By embracing a more flexible approach, we can cater to a wider range of use cases and empower developers to innovate without constraints.
+        </p>
+        <p>
+            The synergy between ERC6551 and ERC7656 exemplifies how building upon established standards can lead to greater advancements in the blockchain ecosystem. Without the pioneering work of ERC6551, the ideas presented in ERC7656 would not have been possible.
+        </p>
+    </section>
+
+    <section id="solution">
+        <h2>ERC7656: A Generalized Solution</h2>
+        <p>
+            ERC7656 reimagines the way NFTs interact with smart contracts by removing unnecessary restrictions and embracing flexibility. Here's how:
+        </p>
+        <ul>
+            <li><strong>Generalized Registry:</strong> We introduce a registry that uses generic function and event names, allowing the deployment of any kind of contract linked to an NFT. This means you're not limited to account contracts—you can deploy lending systems, identity verification services, real-world asset associations, and more.</li>
+            <li><strong>Modular Expansion:</strong> By deploying services that extend standard ERC721 NFTs, we avoid the need to modify the ERC721 standard or create new ERCs for every additional feature. This modular approach helps overcome contract size limitations and reduces complexity.</li>
+            <li><strong>Customization:</strong> Projects can deploy their own instances of the registry, customizing it to suit their specific requirements without being constrained by a centralized address.</li>
+            <li><strong>Complementary to ERC6551:</strong> ERC7656 is designed to work alongside ERC6551. Account-like contracts from ERC6551 can seamlessly integrate with the ERC7656 registry, ensuring that existing investments and infrastructure remain valuable.</li>
+        </ul>
+    </section>
+
+    <section id="benefits">
+        <h2>Why Choose ERC7656?</h2>
+        <ul>
+            <li><strong>Unleash Innovation:</strong> Develop a broader range of NFT-linked services without being constrained by specific interfaces or central registries.</li>
+            <li><strong>Build Upon Proven Standards:</strong> Leverage the advancements of ERC6551 while expanding possibilities with ERC7656.</li>
+            <li><strong>Solve Real Problems:</strong> Address the challenges of contract size limitations and ERC proliferation by adopting a modular, extensible approach.</li>
+            <li><strong>Enhance Flexibility:</strong> Customize the registry and linked services to meet the unique needs of your project, without unnecessary overhead.</li>
+            <li><strong>Expand NFT Capabilities:</strong> Seamlessly add new functionalities to NFTs, such as real-world asset linkage, identity services, and more, without altering the core ERC721 standard.</li>
+        </ul>
+    </section>
+
+    <!-- New Section: ERC Proliferation -->
+    <section id="erc-proliferation">
+        <h2>Addressing ERC Proliferation</h2>
+        <p>
+            The Ethereum ecosystem has witnessed a rapid increase in the number of ERC standards, each aiming to introduce new functionalities or address specific use cases. While innovation is essential, this proliferation of ERCs can lead to several challenges:
+        </p>
+        <ul>
+            <li><strong>Contract Size Limitations:</strong> Ethereum smart contracts have a maximum size limit. Incorporating multiple ERC extensions into a single contract can quickly exhaust this limit, making it impractical to add more features.</li>
+            <li><strong>Complexity and Confusion:</strong> A multitude of ERCs can create confusion among developers and users, as they navigate through overlapping functionalities and compatibility issues.</li>
+            <li><strong>Obsolescence:</strong> As new ERCs emerge, older ones may become obsolete, requiring developers to update or migrate contracts, which can be time-consuming and risky.</li>
+        </ul>
+        <p>
+            <strong>ERC7656 offers a solution by allowing developers to deploy services that extend the capabilities of standard ERC721 NFTs without creating new ERCs.</strong> Instead of modifying the core ERC721 standard or integrating numerous extensions, you can deploy specialized ERC7656 services linked to your NFTs.
+        </p>
+        <p>
+            <strong>Examples of Use Cases:</strong>
+        </p>
+        <ul>
+            <li><strong>Special Rights Management:</strong> Assign unique rights or privileges to NFT holders by deploying a service that manages these permissions without altering the original NFT contract.</li>
+            <li><strong>Real-World Asset Association:</strong> Link physical assets to NFTs through a service that handles verification, ownership proofs, and legal compliance.</li>
+            <li><strong>Financial Data Integration:</strong> Attach financial instruments or data feeds to your NFTs by deploying a service that interacts with oracles or DeFi protocols.</li>
+            <li><strong>Identity and Reputation Systems:</strong> Implement identity verification or reputation scoring linked to NFTs, enabling trust and authenticity in digital interactions.</li>
+            <li><strong>Fractional Ownership:</strong> Facilitate fractional ownership of high-value NFTs by deploying services that manage shared ownership and distribution of benefits.</li>
+            <li><strong>Governance and Voting Rights:</strong> Enable decentralized governance mechanisms by linking voting rights and decision-making processes to NFTs through specialized services.</li>
+            <li><strong>Rental and Leasing:</strong> Create rental or leasing models for NFTs by deploying services that manage time-bound access and payments without modifying the NFT itself.</li>
+            <li><strong>Dynamic Metadata and Upgradability:</strong> Allow NFTs to have dynamic metadata or be upgradable by linking them to services that manage changes over time.</li>
+            <li><strong>Royalties and Revenue Sharing:</strong> Implement complex royalty schemes or revenue-sharing models by deploying services that handle distributions to creators and stakeholders.</li>
+            <li><strong>Compliance and Regulatory Requirements:</strong> Attach compliance checks, KYC/AML procedures, or regulatory requirements to NFTs via linked services to meet legal obligations.</li>
+            <li><strong>Cross-Chain Interactions:</strong> Facilitate cross-chain interoperability by linking NFTs to services that handle cross-chain communication and asset bridging.</li>
+            <li><strong>Game Mechanics and Assets:</strong> Integrate game-specific mechanics, assets, or attributes by deploying services that manage in-game functionality without altering the NFT standard.</li>
+            <li><strong>Content Access Control:</strong> Manage access to exclusive content, events, or features by linking NFTs to services that verify ownership and grant permissions.</li>
+        </ul>
+        <p>
+            By using ERC7656 services, developers can:
+        </p>
+        <ul>
+            <li><strong>Maintain Simplicity:</strong> Keep the original NFT contracts simple and focused, reducing potential bugs and security vulnerabilities.</li>
+            <li><strong>Enhance Modularity:</strong> Add or remove functionalities by deploying or updating services without impacting the core NFT contract.</li>
+            <li><strong>Future-Proof Solutions:</strong> Avoid the need to adopt new ERCs that may become obsolete, as services can be updated independently to adapt to new requirements or standards.</li>
+        </ul>
+        <p>
+            <strong>Conclusion:</strong>
+        </p>
+        <p>
+            ERC7656 empowers developers to overcome the limitations posed by ERC proliferation. By deploying flexible and modular services linked to NFTs, you can innovate rapidly without the overhead of integrating multiple ERC standards or worrying about future obsolescence.
+        </p>
+    </section>
+
+
+    <section id="reference">
+        <h2>Reference Implementation</h2>
+        <p>
+            ERC7656 has an official reference implementation available on GitHub:
+        </p>
+        <p>
+            <a href="https://github.com/crunaprotocol/erc7656" target="_blank" style="color: #00bfa5;">github.com/crunaprotocol/erc7656</a>
+        </p>
+        <h3>Deployment Details</h3>
+        <p>
+            The following bytecode:
+        </p>
+        <pre>
+0x608060405234801561001057600080fd5b506102ac806100206000396000f3fe608060405234801561001057600080fd5b50600436106100415760003560e01c806301ffc9a714610046578063188db64e1461007f578063de307f46146100aa575b600080fd5b61006a6100543660046101db565b6001600160e01b0319166318d7b92160e31b1490565b60405190151581526020015b60405180910390f35b61009261008d366004610228565b6100bd565b6040516001600160a01b039091168152602001610076565b6100926100b8366004610228565b610121565b600060806024608c376e5af43d82803e903d91602b57fd5bf3606c5285605d52733d60ad80600a3d3981f3363d3d373d3d3d363d7360495260ff60005360b76055206035523060601b60015284601552605560002060601b60601c60005260206000f35b600060806024608c376e5af43d82803e903d91602b57fd5bf3606c5285605d52733d60ad80600a3d3981f3363d3d373d3d3d363d7360495260ff60005360b76055206035523060601b600152846015526055600020803b6101cb578560b760556000f5806101975763d786d3936000526004601cfd5b80606c52508284887fc6989e4f290074742210cbd6491de7ded9cfe2cd247932a53d31005007a6341a6060606ca46020606cf35b8060601b60601c60005260206000f35b6000602082840312156101ed57600080fd5b81356001600160e01b03198116811461020557600080fd5b9392505050565b80356001600160a01b038116811461022357600080fd5b919050565b600080600080600060a0868803121561024057600080fd5b6102498661020c565b945060208601359350604086013592506102656060870161020c565b94979396509194608001359291505056fea2646970667358221220a1eb08bd0d109d374fd4407e83d3b08f6b15af09e7c6a54b68d446696c062ad764736f6c63430008160033
+    </pre>
+        <p>
+            has been deployed to <code>erc7656.eth</code>, i.e.:
+        </p>
+        <pre>
+0x7656f0fB4Ca6973cf99D910B36705a2dEDA97eA1
+    </pre>
+        <p>
+            using the following salt:
+        </p>
+        <pre>
+0x765600000000000000000000000000000000000000000000000000000000cf7e
+    </pre>
+        <p>
+            The deployment has been made on the following networks:
+        </p>
+        <h4>Mainnets:</h4>
+        <ul>
+            <li>Ethereum</li>
+            <li>Polygon</li>
+            <li>BNB Chain</li>
+            <li>Base</li>
+        </ul>
+        <h4>Testnets:</h4>
+        <ul>
+            <li>Sepolia</li>
+            <li>Avalanche Fuji</li>
+            <li>Celo Alfajores</li>
+            <li>Base Sepolia</li>
+            <li>Arbitrum Sepolia</li>
+            <li>Polygon Mumbai</li>
+        </ul>
+        <p>
+            The code has been verified on most mainnets. For deployment details, refer to <code>contracts/bytecode.json</code> in the GitHub repository.
+        </p>
+
+        <p><i>Notice that you can use it for your convenience, or deploy your own version where you prefer.</i></p>
+
+        <h3>Usage Instructions</h3>
+        <p>
+            You can install ERC7656 as a dependency via npm:
+        </p>
+        <pre>
+npm install erc7656 @openzeppelin/contracts
+    </pre>
+        <p>
+            Make your NFT able to deploy plugins:
+        </p>
+        <pre>
+// SPDX-License-Identifier: MIT
+// Compatible with OpenZeppelin Contracts ^5.0.0
+pragma solidity ^0.8.20;
+
+import {ERC721} from "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
+import {ERC7656DeployLib} from "erc7656/utils/ERC7656DeployLib.sol";
+
+contract MyExpandableToken is ERC721, Ownable {
+
+  error NotTheTokenOwner();
+
+  constructor(address initialOwner)
+    ERC721("MyExpandableToken", "MET")
+    Ownable(initialOwner) {
+  }
+
+  function safeMint(address to, uint256 tokenId) public onlyOwner {
+    _safeMint(to, tokenId);
+  }
+
+  function deployContractsOwnedByTheTokenId(
+    address implementation,
+    bytes32 salt,
+    uint256 tokenId
+  ) external payable virtual {
+    if (_msgSender() != ownerOf(tokenId)) revert NotTheTokenOwner();
+    // Passing address(0) as the registry address because we use the canonical one
+    ERC7656DeployLib.deploy(implementation, salt, address(this), tokenId, address(0));
+  }
+
+}
+    </pre>
+        <p>
+            To create your service, extend <code>erc7656/ERC7656Service.sol</code> or <code>erc7656/extensions/ERC7656ServiceExt.sol</code>.
+        </p>
+        <p>
+            <strong>Note:</strong> Anyone can deploy a service owned by a specific token using whatever salt they prefer. To avoid security issues, design your initial setup so that, regardless of who deploys it, the result behaves as expected. For example, if a service needs information from the token, the service should query the token directly rather than relying on external parameters during deployment. Passing parameters during deployment can open opportunities for malicious actors to manipulate the service's behavior.
+        </p>
+        <h3>License</h3>
+        <p>
+            The reference implementation is licensed under MIT.
+        </p>
+    </section>
+
+    <section id="get-involved">
+        <h2>Join the Movement</h2>
+        <p>
+            ERC7656 is more than just a proposal—it's a continuation of the innovation sparked by ERC6551. Together, these standards pave the way for a more dynamic and versatile NFT ecosystem. We invite developers to collaborate, share ideas, and contribute to the evolution of NFT technology.
+        </p>
+        <p>
+            Whether you're an experienced developer or new to the space, your insights and contributions are invaluable. Join the discussion, contribute to the codebase, or start building with ERC7656 today.
+        </p>
+        <a href="https://ethereum-magicians.org/t/variation-to-erc6551-to-deploy-any-kind-of-contract-linked-to-an-nft/19223" class="button">Join the Discussion</a>
+        <a href="https://eips.ethereum.org/EIPS/eip-7656" class="button" style="margin-left: 10px;">Read the Proposal</a>
+    </section>
+</div>
+
+<footer>
+    <p>&copy; 2023+ Cruna</p>
+</footer>
